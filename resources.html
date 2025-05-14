@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* (Your existing CSS styles here) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #007bff, #00aaff);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        /* Content Container */
+        .container {
+            width: 80%;
+            max-width: 750px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            color: black;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 120px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        h2 {
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #007bff;
+            font-size: 22px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: scale(1.05);
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        ul li a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #ff6b6b;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-link a:hover {
+            color: #d43f3f;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Faculty <span style="color:white;">Portal</span></div>
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('teacher_dashboard') }}">Faculty Predictor</a>
+            <a href="{{ url_for('review') }}">Research Review</a>
+            <a href="{{ url_for('resources') }}">Resources</a>
+            {% if 'username' in session %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>📖 Faculty Resources</h1>
+        <p style="text-align:center;">Explore articles, research papers, video lectures, and tools to enhance your academic and professional skills.</p>
+
+        <h2>📚 Recommended Articles</h2>
+        <ul>
+            <li>📖 <a href="https://www.nature.com/articles" target="_blank">Nature - Scientific Research Articles</a></li>
+            <li>📖 <a href="https://www.sciencedirect.com/" target="_blank">ScienceDirect - Peer-Reviewed Journals</a></li>
+            <li>📖 <a href="https://arxiv.org/" target="_blank">ArXiv - Open Access Research Papers</a></li>
+        </ul>
+
+        <h2>📄 Research Paper Repositories</h2>
+        <ul>
+            <li>🔍 <a href="https://scholar.google.com/" target="_blank">Google Scholar</a></li>
+            <li>📖 <a href="https://www.jstor.org/" target="_blank">JSTOR - Digital Library</a></li>
+            <li>📄 <a href="https://www.researchgate.net/" target="_blank">ResearchGate</a></li>
+        </ul>
+
+        <h2>🎥 Video Lectures</h2>
+        <ul>
+            <li>🎓 <a href="https://www.youtube.com/c/mitocw" target="_blank">MIT OpenCourseWare (YouTube)</a></li>
+            <li>🎓 <a href="https://www.youtube.com/c/stanford" target="_blank">Stanford University (YouTube)</a></li>
+            <li>🎓 <a href="https://www.coursera.org/" target="_blank">Coursera - Free and Paid Courses</a></li>
+            <li>🎓 <a href="https://www.udemy.com/" target="_blank">Udemy - Faculty Development Courses</a></li>
+        </ul>
+
+        <h2>🗣️ Communication Development</h2>
+        <ul>
+            <li>🎤 <a href="https://www.youtube.com/results?search_query=public+speaking+tips" target="_blank">Public Speaking Tips (YouTube)</a></li>
+            <li>💬 <a href="https://www.skillsyouneed.com/ips/communication-skills.html" target="_blank">Communication Skills Guide</a></li>
+        </ul>
+
+        <h2>🧘 Personal Development</h2>
+        <ul>
+            <li>🌱 <a href="https://www.youtube.com/results?search_query=mindfulness+meditation" target="_blank">Mindfulness & Meditation (YouTube)</a></li>
+            <li>📚 <a href="https://www.goodreads.com/shelf/show/personal-development" target="_blank">Personal Development Books (Goodreads)</a></li>
+        </ul>
+
+        <h2>🛠️ Research Tools</h2>
+        <ul>
+            <li>📝 <a href="https://www.citationmachine.net/" target="_blank">Citation Machine - Citation Generator</a></li>
+            <li>📊 <a href="https://www.connectedpapers.com/" target="_blank">Connected Papers - Visual Research Discovery</a></li>
+            <li>📄 <a href="https://www.grammarly.com/" target="_blank">Grammarly - Grammar Checker</a></li>
+        </ul>
+
+        <h2>⏱️ Time Management Tools</h2>
+        <ul>
+            <li>📅 <a href="https://calendar.google.com/" target="_blank">Google Calendar</a></li>
+            <li>📝 <a href="https://todoist.com/" target="_blank">Todoist - Task Management</a></li>
+            <li>⏳ <a href="https://pomofocus.io/" target="_blank">Pomofocus - Pomodoro Timer</a></li>
+        </ul>
+
+        <h2>🖥️ Online Teaching Resources</h2>
+        <ul>
+            <li>🌐 <a href="https://www.zoom.us/" target="_blank">Zoom - Video Conferencing</a></li>
+            <li>📚 <a href="https://www.moodle.org/" target="_blank">Moodle - Learning Management System</a></li>
+            <li>📝 <a href="https://www.canva.com/education/" target="_blank">Canva for Education - Presentation Tools</a></li>
+        </ul>
+            <h2>📄 Patent Resources</h2>
+        <ul>
+            <li>🔍 <a href="https://patents.google.com/" target="_blank">Google Patents - Patent Search</a></li>
+            <li>🏛️ <a href="https://www.uspto.gov/" target="_blank">USPTO - United States Patent and Trademark Office</a></li>
+            <li>🌍 <a href="https://www.espacenet.com/" target="_blank">Espacenet - European Patent Office</a></li>
+        </ul>
+
+        <h2>📚 Publication and Citation Resources</h2>
+        <ul>
+            <li>🔍 <a href="https://scholar.google.com/" target="_blank">Google Scholar - Academic Search</a></li>
+            <li>📊 <a href="https://www.scopus.com/" target="_blank">Scopus - Abstract and Citation Database</a></li>
+            <li>🌐 <a href="https://www.webofscience.com/" target="_blank">Web of Science - Citation Index</a></li>
+            <li>📖 <a href="https://ieeexplore.ieee.org/" target="_blank">IEEE Xplore - Technical Literature</a></li>
+            <li>💻 <a href="https://dl.acm.org/" target="_blank">ACM Digital Library - Computing Literature</a></li>
+            <li>📝 <a href="https://www.zotero.org/" target="_blank">Zotero - Citation Management</a></li>
+            <li>📄 <a href="https://www.mendeley.com/" target="_blank">Mendeley - Reference Manager</a></li>
+            <li>📝 <a href="https://endnote.com/" target="_blank">EndNote - Reference Software</a></li>
+            <li>📄 <a href="https://arxiv.org/" target="_blank">ArXiv - Open Access Research Papers</a></li>
+            <li>📄 <a href="https://www.researchgate.net/" target="_blank">ResearchGate - Research Sharing Platform</a></li>
+
+        </ul>
+
+        <h2>🎓 Teaching Effectiveness Tools</h2>
+        <ul>
+            <li>📚 <a href="https://www.moodle.org/" target="_blank">Moodle - Learning Management System</a></li>
+            <li>🌐 <a href="https://www.canvaslms.com/" target="_blank">Canvas - Learning Platform</a></li>
+            <li>📝 <a href="https://www.blackboard.com/" target="_blank">Blackboard - Online Learning</a></li>
+            <li>📝 <a href="https://classroom.google.com/" target="_blank">Google Classroom - Online Teaching</a></li>
+            <li>🎮 <a href="https://www.kahoot.com/" target="_blank">Kahoot! - Interactive Quizzes</a></li>
+            <li>📊 <a href="https://www.polleverywhere.com/" target="_blank">Poll Everywhere - Audience Polling</a></li>
+            <li>🗣️ <a href="https://www.mentimeter.com/" target="_blank">Mentimeter - Interactive Presentations</a></li>
+            <li>📝 <a href="https://www.surveymonkey.com/" target="_blank">SurveyMonkey - Online Surveys</a></li>
+            <li>📝 <a href="https://forms.google.com/" target="_blank">Google Forms - Survey Tool</a></li>
+            <li>📊 <a href="https://www.r-project.org/" target="_blank">R Project - Statistical Computing</a></li>
+            <li>🐍 <a href="https://www.python.org/" target="_blank">Python with Pandas/Scikit-learn - Data Analysis</a></li>
+            <li>📊 <a href="https://www.ibm.com/products/spss-statistics" target="_blank">SPSS - Statistical Software</a></li>
+            <li>📚 <a href="https://www.edutopia.org/" target="_blank">Edutopia - Educational Resources</a></li>
+        </ul>
+
+        <div class="back-link">
+            <a href="{{ url_for('home') }}">⬅ Back to Home</a>
+        </div>

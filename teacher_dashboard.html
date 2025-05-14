@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Designation Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #63d0ff;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #1e2a38;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Faculty Portal</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/teacher">Faculty Prediction</a>
+            <a href="/review">Research Review</a>
+            <a href="/resources">Resources</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Faculty Designation Prediction</h2>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}  <!-- CSRF Token -->
+
+            <label for="years">Years of Service:</label>
+            <input type="number" id="years" name="years_of_service" class="form-control" value="{{ form.years_of_service.data or '' }}" required>
+
+            <label for="patents">Patent Count:</label>
+            <input type="number" id="patents" name="patent_count" class="form-control" value="{{ form.patent_count.data or '' }}">
+
+            <label for="journals">Publication Records (Journals):</label>
+            <input type="number" id="journals" name="publication_count" class="form-control" value="{{ form.publication_count.data or '' }}">
+
+            <label for="conferences">Publication Records (Conferences):</label>
+            <input type="number" id="conferences" name="conference_count" class="form-control" value="{{ form.conference_count.data or '' }}">
+
+            <label for="engagement">Student Engagement (1-10):</label>
+            <input type="number" id="engagement" name="student_engagement" class="form-control" min="1" max="10" value="{{ form.student_engagement.data or '' }}">
+
+            <label for="doubt">Doubt Resolution (1-10):</label>
+            <input type="number" id="doubt" name="doubt_resolution" class="form-control" min="1" max="10" value="{{ form.doubt_resolution.data or '' }}">
+
+            <label for="innovation">Teaching Innovation Metrics (1-10):</label>
+            <input type="number" id="innovation" name="teaching_innovation" class="form-control" min="1" max="10" value="{{ form.teaching_innovation.data or '' }}">
+
+            <label for="success">Student Success Rates (1-10):</label>
+            <input type="number" id="success" name="student_success" class="form-control" min="1" max="10" value="{{ form.student_success.data or '' }}">
+
+            <button type="submit" class="btn">Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div id="result">
+                <p>Predicted Designation: <strong>{{ prediction }}</strong></p>
+            </div>
+        {% endif %}
+
+        <a href="/recommendations">
+            <button class="btn">Get Recommendations</button>
+        </a>
+    </div>
+</body>
+</html>

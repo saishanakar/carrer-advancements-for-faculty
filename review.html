@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Work Review</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #00c6ff ;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #1e2a38;
+        }
+        #review-result {
+            margin-top: 20px;
+            font-weight: bold;
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            color: #333;
+        }
+        .flash-messages div {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Faculty Portal</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/teacher">Faculty Prediction</a>
+            <a href="/review">Research Review</a>
+            <a href="/resources">Resources</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Research Work Review</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- FORM START -->
+        <form method="POST">
+            <label for="title">Research Title:</label>
+            <input type="text" id="title" name="title" class="form-control" required>
+
+            <label for="abstract">Abstract:</label>
+            <textarea id="abstract" name="abstract" class="form-control" rows="4" required></textarea>
+
+            <label for="keywords">Keywords (comma-separated):</label>
+            <input type="text" id="keywords" name="keywords" class="form-control">
+
+            <label for="domain">Domain:</label>
+            <input type="text" id="domain" name="domain" class="form-control">
+
+            <button type="submit">Submit for Review</button>
+        </form>
+        <!-- FORM END -->
+
+        <!-- {% if review_feedback %}
+            <div id="review-result">
+                <h3>Review Feedback</h3>
+                <p>{{ review_feedback }}</p>
+            </div>
+        {% endif %} -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+            margin-top: 80px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .features ul li {
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #4ec4ff;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+
+        .cta a:hover {
+            background-color: #1e2a38;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Faculty Portal</div>
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('teacher_dashboard') }}">Faculty Predictor</a>
+            <a href="{{ url_for('review') }}">Research Review</a>
+            <a href="{{ url_for('resources') }}">Resources</a>
+            <a href="{{ url_for('logout') if username else url_for('login') }}">{{ 'Logout' if username else 'Login' }}</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>📌 Welcome to the Faculty Portal</h1>
+        <p>Empowering educators with AI-driven insights! Track your career progression, explore valuable resources, and elevate your academic journey.</p>
+
+        <div class="features">
+            <h2>🌟 What You Can Do</h2>
+            <ul>
+                <li>📊 <strong>Faculty Predictor:</strong> Analyze your research impact and teaching contributions to predict your career growth.</li>
+                <li>📚 <strong>Exclusive Resources:</strong> Access a curated library of research papers, articles, and expert video lectures.</li>
+                <li>🔐 <strong>Personalized Experience:</strong> Securely log in to track progress and customize your learning.</li>
+            </ul>
+        </div>
+
+        <div class="cta">
+            <a href="{{ url_for('teacher_dashboard') }}">🔍 Try Faculty Predictor</a>
+            <a href="{{ url_for('resources') }}">📖 Explore Resources</a>
+        </div>
+    </div>
+</body>
+</html>

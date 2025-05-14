@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Prediction</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .logo span:first-child {
+            color: #00aaff;
+        }
+
+        .logo span:last-child {
+            color: white;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .navbar-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 100px auto 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ff7800;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><span>Faculty</span> <span>Portal</span></div>
+        <div class="navbar-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('teacher_dashboard') }}">Faculty Predictor</a>
+            <a href="{{ url_for('review') }}">Reviewer</a>
+            <a href="{{ url_for('resources') }}">Resources</a>
+            <a href="{{ url_for('logout') if username else url_for('login') }}">{{ 'Logout' if username else 'Login' }}</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>📌 Faculty Designation Prediction</h2>
+        <form id="predictionForm">
+            <label for="years">Years of Service:</label>
+            <input type="number" id="years" required>
+
+            <label for="patents">Patent Count:</label>
+            <input type="number" id="patents" required>
+
+            <label for="journals">Publication Records (Journals):</label>
+            <input type="number" id="journals" required>
+
+            <label for="conferences">Publication Records (Conferences):</label>
+            <input type="number" id="conferences" required>
+
+            <label for="engagement">Student Engagement (1-10):</label>
+            <input type="number" id="engagement" min="1" max="10" required>
+
+            <label for="doubt">Doubt Resolution (1-10):</label>
+            <input type="number" id="doubt" min="1" max="10" required>
+
+            <label for="innovation">Teaching Innovation Metrics (1-10):</label>
+            <input type="number" id="innovation" min="1" max="10" required>
+
+            <label for="success">Student Success Rates (1-10):</label>
+            <input type="number" id="success" min="1" max="10" required>
+
+            <button type="button" id="predictButton">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("predictButton").addEventListener("click", function () {
+                let inputData = {
+                    "Years of Service": parseInt(document.getElementById("years").value),
+                    "Patent Count": parseInt(document.getElementById("patents").value),
+                    "Publication Records (Journals)": parseInt(document.getElementById("journals").value),
+                    "Publication Records (Conferences)": parseInt(document.getElementById("conferences").value),
+                    "Student Engagement (1-10)": parseInt(document.getElementById("engagement").value),
+                    "Doubt Resolution (1-10)": parseInt(document.getElementById("doubt").value),
+                    "Teaching Innovation Metrics (1-10)": parseInt(document.getElementById("innovation").value),
+                    "Student Success Rates (1-10)": parseInt(document.getElementById("success").value)
+                };
+
+                fetch("http://127.0.0.1:5001/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(inputData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML = 
+                        `<p>Predicted Designation: ${data["Predicted Designation"]}</p>
+                         <p>Recommendation: ${data["Recommendation"]}</p>`;
+                })
+                .catch(error => {
+                    document.getElementById("result").innerHTML = "<p style='color:red;'>Error in prediction.</p>";
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
